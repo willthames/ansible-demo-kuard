@@ -20,7 +20,7 @@ spec:
         fsGroup: 2000
       containers:
         - name: {{ kube_resource_name }}
-          image: {{ container_registry|ternary(container_registry + "/", "") }}{{ container_image }}:{{ container_tag }}
+          image: {{ image_registry|ternary(image_registry + "/", "") }}{{ image_name }}:{{ image_tag }}
           imagePullPolicy: {{ image_pull_policy }}
           ports:
             - containerPort: {{ kube_service_backend_port }}
