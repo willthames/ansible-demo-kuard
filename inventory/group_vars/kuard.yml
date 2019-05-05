@@ -1,0 +1,17 @@
+kube_resource_configmaps:
+  env-configmap: "{{ lookup('template', kube_resource_template_dir + 'env-configmap.yml') | from_yaml }}"
+kube_resource_secrets:
+  env-secrets: "{{ lookup('template', kube_resource_template_dir + 'env-secrets.yml') | from_yaml }}"
+kube_resource_manifest_files: "{{ query('fileglob', kube_resource_template_dir + '*manifest.yml') }}"
+container_image: kuar-demo/kuard-amd4
+container_registry: gcr.io
+image_pull_policy: Always
+kube_service_backend_port: 8080
+kube_service_port: 80
+kuard_database_password: !vault |
+  $ANSIBLE_VAULT;1.1;AES256
+  61346163343434313331646336653838363539666264653534393930353534373764303762633037
+  3464663038633133646363333836373036326166343733340a303334613539656337366633316665
+  62383230373431623038306266663235623763343663343933323130643534353464333566373361
+  6136333031353035640a326331376331356463333131656664643438316264666530356432366338
+  3230
